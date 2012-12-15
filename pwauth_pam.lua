@@ -32,7 +32,7 @@ local pwauth_pam = {}
 
 pwauth_pam.__index = pwauth_pam
 
-function pwauth_pam.conf(service)
+function pwauth_pam.new(service)
 	local cfg = {
 		service = service
 	}
@@ -42,7 +42,7 @@ function pwauth_pam.conf(service)
 	return cfg
 end
 
-function pwauth_pam.auth(cfg, username, password)
+function pwauth_pam.authenticate(cfg, username, password)
 	local userdata = {username, password}
 
 	local handle, err = pam.start(cfg.service, username, {pam_conversation, userdata})
