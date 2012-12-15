@@ -50,12 +50,12 @@ function pwauth_pam.auth(cfg, username, password)
 		return nil, err
 	end
 
-	local success, err = pam.authenticate(handle)
+	local success, err = handle:authenticate()
 	if not success then
 		return nil, err
 	end
 
-	local success, err = pam.endx(handle, pam.PAM_SUCCESS)
+	local success, err = handle:endx(pam.PAM_SUCCESS)
 	if not success then
 		return nil, err
 	end
