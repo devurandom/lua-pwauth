@@ -4,6 +4,9 @@ local pam = require "pam"
 
 local function pam_conversation(messages, userdata)
 	local username, password = userdata[1], userdata[2]
+	if not (username and password) then
+		error("Empty userdata?!")
+	end
 
 	local responses = {}
 
