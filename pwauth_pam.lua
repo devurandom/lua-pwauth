@@ -13,18 +13,18 @@ local function pam_conversation(messages, userdata)
 	for i, message in ipairs(messages) do
 		local msg_style, msg = message[1], message[2]
 
-		if msg_style == pam.PAM_PROMPT_ECHO_OFF then
+		if msg_style == pam.PROMPT_ECHO_OFF then
 			-- Assume PAM asks us for the password
 			responses[i] = {password, 0}
-		elseif msg_style == pam.PAM_PROMPT_ECHO_ON then
+		elseif msg_style == pam.PROMPT_ECHO_ON then
 			-- Assume PAM asks us for the username
 			responses[i] = {username, 0}
-		elseif msg_style == pam.PAM_ERROR_MSG then
+		elseif msg_style == pam.ERROR_MSG then
 			responses[i] = {"", 0}
-		elseif msg_style == pam.PAM_TEXT_INFO then
+		elseif msg_style == pam.TEXT_INFO then
 			responses[i] = {"", 0}
 		else
-			error("Unsupported conversation message style: %d", msg_style)
+			error("Unsupported conversation message style: " .. msg_style)
 		end
 	end
 
@@ -58,7 +58,7 @@ function pwauth_pam.authenticate(cfg, username, password)
 		return nil, err
 	end
 
-	local success, err = handle:endx(pam.PAM_SUCCESS)
+	local success, err = handle:endx(pam.SUCCESS)
 	if not success then
 		return nil, err
 	end
