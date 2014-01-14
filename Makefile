@@ -5,4 +5,4 @@ default: all
 all clean: $(SUBDIRS)
 
 $(SUBDIRS)::
-	$(MAKE) $(MAKEFLAGS) -C $@ $(MAKECMDGOALS)
+	$(MAKE) -C $@ $(MAKECMDGOALS)
